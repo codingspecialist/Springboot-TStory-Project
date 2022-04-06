@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+    session:
+      timeout: 30
+
+spring:
+  mustache:
+    expose-session-attributes: true
+  datasource:
+      url: jdbc:mariadb://localhost:3306/greendb 
+      driver-class-name: org.mariadb.jdbc.Driver
+      username: green
+      password: green1234
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  output:
+    ansi:
+      enabled: always

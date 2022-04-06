@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+    session:
+      timeout: 30
+
+spring:
+  mustache:
+    expose-session-attributes: true
+  datasource:
+      url: jdbc:mariadb://아이피:3306/greendb 
+      driver-class-name: org.mariadb.jdbc.Driver
+      username: 유저명
+      password: 비밀번호
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none # 조심하자!! 젭알 ㅠ
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
