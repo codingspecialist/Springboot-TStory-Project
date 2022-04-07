@@ -2,6 +2,7 @@ package site.metacoding.blogv3.domain.visit;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -19,12 +20,14 @@ import site.metacoding.blogv3.domain.user.User;
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
 @Entity
 public class Visit {
+    // User 회원가입시 방문자 카운트 0으로 초기화 해두자.
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer totalCount;
+    @Column(nullable = false)
+    private Long totalCount;
 
     @JoinColumn(name = "userId")
     @ManyToOne
