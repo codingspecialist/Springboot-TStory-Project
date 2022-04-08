@@ -1,0 +1,21 @@
+/* PrimaryColor */
+.my_bg_primary {
+    background-color: white;
+}
+
+.my_bg_success {
+    background-color: rgb(30, 180, 159);
+}
+
+.my_bg_active {
+    background-color: rgb(255, 85, 68);
+}
+
+.my_bg_secondary {
+    background-color: rgb(185, 185, 185);
+}
+
+
+.my_text_primary {
+    color: rgb(25, 25, 25);
+}

@@ -1,0 +1,99 @@
+/* 
+    .m_lg_1
+    .m_lg_2
+    .m_lg_3
+
+    .ml_lg_1
+    .ml_lg_2
+    .ml_lg_3
+
+    .mr_sm_1
+    .mr_sm_2
+    .mr_sm_3
+
+    .p_md_1
+*/
+
+/* 미디엄 사이즈 */
+
+.my_m_md_1 {
+    margin: 15px;
+}
+
+.my_p_md_1 {
+    padding: 15px;
+}
+
+.my_ml_md_1 {
+    margin-left: 15px;
+}
+
+.my_mr_md_1 {
+    margin-right: 15px;
+}
+
+.my_mt_md_1 {
+    margin-top: 15px;
+}
+
+.my_mb_md_1 {
+    margin-bottom: 15px;
+}
+
+.my_pl_md_1 {
+    padding-left: 15px;
+}
+
+.my_pr_md_1 {
+    padding-right: 15px;
+}
+
+.my_pt_md_1 {
+    padding-top: 15px;
+}
+
+.my_pb_md_1 {
+    padding-bottom: 15px;
+}
+
+/* 라지 사이즈 */
+
+.my_m_lg_1 {
+    margin: 30px;
+}
+
+.my_p_lg_1 {
+    padding: 30px;
+}
+
+.my_ml_lg_1 {
+    margin-left: 30px;
+}
+
+.my_mr_lg_1 {
+    margin-right: 30px;
+}
+
+.my_mt_lg_1 {
+    margin-top: 30px;
+}
+
+.my_mb_lg_1 {
+    margin-bottom: 30px;
+}
+
+.my_pl_lg_1 {
+    padding-left: 30px;
+}
+
+.my_pr_lg_1 {
+    padding-right: 30px;
+}
+
+.my_pt_lg_1 {
+    padding-top: 30px;
+}
+
+.my_pb_lg_1 {
+    padding-bottom: 30px;
+}
