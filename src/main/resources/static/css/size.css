@@ -14,7 +14,7 @@
     .p_md_1
 */
 
-/* 미디엄 사이즈 */
+/* 갭 미디엄 사이즈 */
 
 .my_m_md_1 {
     margin: 15px;
@@ -56,7 +56,7 @@
     padding-bottom: 15px;
 }
 
-/* 라지 사이즈 */
+/* 갭 라지 사이즈 */
 
 .my_m_lg_1 {
     margin: 30px;
@@ -96,4 +96,10 @@
 
 .my_pb_lg_1 {
     padding-bottom: 30px;
+}
+
+/* 컴포넌트 사이즈 */
+.my_sm_1 {
+    width: 30px;
+    height: 30px;
 }

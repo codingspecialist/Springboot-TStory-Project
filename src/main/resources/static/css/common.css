@@ -22,3 +22,13 @@
 .my_icon_btn:hover {
     background-color: rgb(185, 185, 185);
 }
+
+.my_profile_rounded_img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.my_hidden {
+    display: none;
+}
