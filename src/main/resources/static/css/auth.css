@@ -1,0 +1,36 @@
+.my_auth_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my_auth_form_box {
+    width: 400px;
+    border: 1px solid rgb(185, 185, 185);
+    padding: 70px;
+}
+
+.my_auth_form_box_link {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my_auth_form_box_title {
+    color: rgb(25, 25, 25);
+    font-size: 30px;
+    font-weight: 700;
+    margin: 5px 0;
+}
+
+.my_auth_form_box_input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgb(185, 185, 185);
+}
+
+.my_auth_form_box_input:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+}

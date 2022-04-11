@@ -8,10 +8,12 @@
     border: 1px solid black;
     border-radius: 20px;
     cursor: pointer;
+    color: black;
 }
 
 .my_main_start_btn:hover {
     background-color: rgb(255, 85, 68);
     color: white;
     border: 1px solid white;
+    text-decoration-line: none;
 }

@@ -14,6 +14,48 @@
     .p_md_1
 */
 
+/* 갭 스몰 사이즈 */
+
+.my_m_sm_1 {
+    margin: 5px;
+}
+
+.my_p_sm_1 {
+    padding: 5px;
+}
+
+.my_ml_sm_1 {
+    margin-left: 5px;
+}
+
+.my_mr_sm_1 {
+    margin-right: 5px;
+}
+
+.my_mt_sm_1 {
+    margin-top: 5px;
+}
+
+.my_mb_sm_1 {
+    margin-bottom: 5px;
+}
+
+.my_pl_sm_1 {
+    padding-left: 5px;
+}
+
+.my_pr_sm_1 {
+    padding-right: 5px;
+}
+
+.my_pt_sm_1 {
+    padding-top: 5px;
+}
+
+.my_pb_sm_1 {
+    padding-bottom: 5px;
+}
+
 /* 갭 미디엄 사이즈 */
 
 .my_m_md_1 {
