@@ -71,3 +71,8 @@ userId
 createDate
 updateDate
 ```
+
+### Gradle depenency update
+'''txt
+./gradlew --refresh-dependencie
+'''
