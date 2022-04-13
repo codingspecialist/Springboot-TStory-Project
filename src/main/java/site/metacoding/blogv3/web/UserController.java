@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.service.UserService;
 import site.metacoding.blogv3.util.UtilValid;
-import site.metacoding.blogv3.util.email.EmailUtil;
 import site.metacoding.blogv3.web.dto.user.JoinReqDto;
 import site.metacoding.blogv3.web.dto.user.PasswordResetReqDto;
 
@@ -20,7 +19,6 @@ import site.metacoding.blogv3.web.dto.user.PasswordResetReqDto;
 @Controller
 public class UserController {
 
-    // DI
     private final UserService userService;
 
     @GetMapping("/login-form")
@@ -42,7 +40,6 @@ public class UserController {
     public String passwordReset(@Valid PasswordResetReqDto passwordResetReqDto, BindingResult bindingResult) {
 
         UtilValid.요청에러처리(bindingResult);
-
         userService.패스워드초기화(passwordResetReqDto);
 
         return "redirect:/login-form";
@@ -59,8 +56,6 @@ public class UserController {
     public String join(@Valid JoinReqDto joinReqDto, BindingResult bindingResult) {
 
         UtilValid.요청에러처리(bindingResult);
-
-        // 핵심 로직
         userService.회원가입(joinReqDto.toEntity());
 
         return "redirect:/login-form";
