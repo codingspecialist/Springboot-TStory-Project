@@ -18,10 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    // 인증 설정하는 메서드
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // super.configure(http);
         http.csrf().disable(); // 이거 안하면 postman 테스트 못함.
 
         http.authorizeRequests()
@@ -32,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .usernameParameter("uname")
                 // .passwordParameter("pwd")
                 .loginPage("/login-form")
-                .loginProcessingUrl("/login") // login 프로세스를 탄다.
+                .loginProcessingUrl("/login")
                 // .failureHandler(null)
                 .successHandler(new LoginSuccessHandler());
 

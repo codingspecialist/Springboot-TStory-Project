@@ -25,7 +25,7 @@
 
     <nav class="drawer-nav" role="navigation">
         <ul class="drawer-menu">
-            <li><a class="drawer-brand" href="#">Brand</a></li>
+            <li><a class="drawer-brand" href="/">Home</a></li>
             <li><a class="drawer-menu-item" href="#">Nav1</a></li>
             <li><a class="drawer-menu-item" href="#">Nav2</a></li>
         </ul>
@@ -33,18 +33,8 @@
 
     <nav class="navbar navbar-expand-sm my_navbar">
 
-        <svg class="my_sm_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 408.4 408.4">
-            <g>
-                <circle class="cls-1" cx="58.18" cy="58.18" r="58.18" />
-                <circle class="cls-1" cx="204.2" cy="58.18" r="58.18" />
-                <circle class="cls-1" cx="204.2" cy="204.2" r="58.18" />
-                <circle class="cls-1" cx="204.2" cy="350.22" r="58.18" />
-                <circle class="cls-1" cx="350.22" cy="58.18" r="58.18" />
-            </g>
-        </svg>
-
         <!-- Links -->
-        <ul class="navbar-nav my_hidden">
+        <ul class="navbar-nav">
             <li class="nav-item">
                 <div class="my_icon_btn drawer-toggle">
                     <i class="fa-solid fa-bars"></i>
@@ -52,17 +42,33 @@
             </li>
         </ul>
 
-        <div class="my_navbar_title">Getinthere</div>
+        <div class="my_navbar_title">
+            Getinthere
+        </div>
 
         <!-- Navbar text-->
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <div>
-                    <a class="my_main_start_btn" href="/login-form">시작하기</a>
+            {{#principal}}
+            <div class="dropdown dropleft">
+                <img src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
+                    class="my_profile_rounded_img_btn dropdown-toggle" data-toggle="dropdown">
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/user/{{id}}/post">내블로그</a>
+                    <a class="dropdown-item" href="/user/{{id}}">계정관리</a>
+                    <a class="dropdown-item" href="/logout">로그아웃</a>
                 </div>
-            </li>
-            <img src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
-                class="my_profile_rounded_img my_hidden">
+            </div>
+
+            {{/principal}}
+            {{^principal}}
+
+            <div>
+                <a class="my_main_start_btn" href="/login-form">시작하기</a>
+            </div>
+
+            {{/principal}}
+
+
         </ul>
 
 

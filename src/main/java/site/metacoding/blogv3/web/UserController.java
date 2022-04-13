@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class UserController {
     @GetMapping("/join-form")
     public String joinForm() {
         return "/user/joinForm";
+    }
+
+    @GetMapping("/user/{id}")
+    public String updateForm(@PathVariable Integer id) {
+        return "/user/updateForm";
     }
 
     @GetMapping("/user/password-reset-form")

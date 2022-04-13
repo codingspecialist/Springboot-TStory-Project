@@ -7,16 +7,17 @@
             <div class="my_error_box my_hidden">
 
             </div>
-            <form action="/join" method="post" onsubmit="return validation()">
-                <input id="username" class="my_auth_form_box_input" type="text" name="username" placeholder="유저네임"
-                    maxlength="20" required />
-                <input id="password" class="my_auth_form_box_input" type="password" name="password" placeholder="비밀번호"
-                    maxlength="20" required />
-                <input id="same-password" class="my_auth_form_box_input" type="password" name="" placeholder="비밀번호 확인"
+            <!-- 수정은 put 요청 fetch 사용해야함 -->
+            <form>
+                <input id="username" class="my_auth_form_box_input" type="text" placeholder="유저네임" maxlength="20"
+                    required readonly />
+                <input id="password" class="my_auth_form_box_input" type="password" placeholder="기존 비밀번호" maxlength="20"
+                    required />
+                <input id="same-password" class="my_auth_form_box_input" type="password" placeholder="수정 비밀번호"
                     maxlength="20" required />
                 <input class="my_auth_form_box_input" type="email" name="email" placeholder="이메일" maxlength="60"
-                    required />
-                <button type="submit" class="my_secondary_btn">회원가입</button>
+                    required readonly />
+                <button type="submit" class="my_secondary_btn">비밀번호수정</button>
             </form>
             <div class="my_auth_form_box_link">
                 <div><a href="/login-form">로그인</a></div>
@@ -26,7 +27,5 @@
     </div>
     <br />
 </div>
-
-<script src="/js/joinForm.js"></script>
 
 {{>/layout/footer}}
