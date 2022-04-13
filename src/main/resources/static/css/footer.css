@@ -1,0 +1,19 @@
+.my_footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    border-top: 1px solid rgb(185, 185, 185);
+}
+
+.my_footer_right_menu {
+    display: flex;
+    justify-content: space-around;
+}
+
+.my_footer_right_menu_item {
+    margin-left: 30px;
+}
+
+.my_footer_right_menu_item > div {
+    margin-bottom: 5px;
+}
