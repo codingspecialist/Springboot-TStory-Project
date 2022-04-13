@@ -40,6 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .passwordParameter("pwd")
                 .loginPage("/login-form")
                 .loginProcessingUrl("/login") // login 프로세스를 탄다.
+                // .failureHandler(null)
+                // .successHandler(null)
                 .defaultSuccessUrl("/");
+
     }
 }

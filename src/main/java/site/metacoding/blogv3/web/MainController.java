@@ -15,11 +15,12 @@ public class MainController {
 
     @GetMapping({ "/" })
     public String main(@AuthenticationPrincipal LoginUser loginUser) {
-        System.out.println(loginUser.getUsername());
-        System.out.println(loginUser.getUser().getUsername());
+        // System.out.println(loginUser.getUsername());
+        // System.out.println(loginUser.getUser().getUsername());
 
-        LoginUser lu = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(lu.getUser().getEmail());
+        // LoginUser lu = (LoginUser)
+        // SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // System.out.println(lu.getUser().getEmail());
         return "main";
     }
 }

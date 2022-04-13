@@ -1,4 +1,10 @@
 
+.my_error_box {
+    background-color: rgb(250, 200, 200);
+    font-style: italic;
+    padding: 15px;
+}
+
 .my_navbar {
     display: flex;
     justify-content: space-between;
