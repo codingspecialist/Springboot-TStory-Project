@@ -1,0 +1,20 @@
+.my_post_list_item {
+    display: flex;
+    border: 1px solid rgb(185, 185, 185);
+    margin-bottom: 30px;
+    padding: 5px;
+}
+
+.my_post_list_item_left {
+    flex: 2;
+    padding: 15px;
+}
+
+.my_post_list_item_right {
+    flex:8;
+    padding: 15px;
+}
+
+.my_post_list_item_right div {
+    margin-bottom: 5px;
+}

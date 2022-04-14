@@ -1,4 +1,9 @@
 
+.my_fakeimg {
+    height: 200px;
+    background-color: rgb(185, 185, 185);
+}
+
 .my_error_box {
     background-color: rgb(250, 200, 200);
     font-style: italic;
@@ -58,4 +63,23 @@
     background-color: rgb(185, 185, 185);
     color: white;
     margin: 5px 0;
+}
+
+.my_success_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(30, 180, 159);
+    color: white;
+    margin: 5px 0;
+}
+
+.my_elipse {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
