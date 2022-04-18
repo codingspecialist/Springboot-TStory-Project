@@ -88,3 +88,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+@media (max-width: 420px) { 
+    .my_post_list_item {
+        display: block !important;
+    }
+    .my_post_list_item_left {
+        width: 100% !important;
+    }
+    .my_success_btn {
+        width: 100% !important;
+    }
+    .my_navbar_title {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+    }
+}
+
