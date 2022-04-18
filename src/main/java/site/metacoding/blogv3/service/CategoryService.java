@@ -17,4 +17,5 @@ public class CategoryService {
     public void 카테고리등록(Category category) {
         categoryRepository.save(category);
     }
+
 }
