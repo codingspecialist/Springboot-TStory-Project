@@ -17,6 +17,11 @@
     background-color: white;
     color: black;
     border-bottom: 1px solid rgb(185, 185, 185);
+    position: relative;
+}
+
+.my_dropdown_menu {
+    position: absolute !important; 
 }
 
 .my_navbar_title {
