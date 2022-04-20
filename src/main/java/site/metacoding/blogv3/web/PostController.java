@@ -30,7 +30,7 @@ public class PostController {
     @PostMapping("/s/post")
     public String write(PostWriteReqDto postWriteReqDto, @AuthenticationPrincipal LoginUser loginUser) {
 
-        postService.게시글쓰기(postWriteReqDto);
+        postService.게시글쓰기(postWriteReqDto, loginUser.getUser());
 
         return "redirect:/user/" + loginUser.getUser().getId() + "/post";
     }
