@@ -11,19 +11,26 @@
 
     <div class="my_post_list">
 
+        {{#postRespDto.posts.content}}
         <div class="my_post_list_item">
             <div class="my_post_list_item_left">
-                <div class="my_fakeimg">Fake Image</div>
+                {{#thumnail}}
+                <img src="/upload/{{thumnail}}" width="100%" height="100%">
+                {{/thumnail}}
+                {{^thumnail}}
+                <div class="my_fakeimg"> </div>
+                {{/thumnail}}
             </div>
             <div class="my_post_list_item_right my_ellipsis">
-                <div class="my_text_title my_ellipsis">제목~~~~~~~~~~~~~ ~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~
+                <div class="my_text_title my_ellipsis">{{title}}
                 </div>
-                <div class="my_text_body_sm">날짜~~~~~~~~~~~~~~~~~~~~~</div>
+                <div class="my_text_body_sm">{{formatCreateDate}}</div>
                 <div class="my_mt_md_1">
-                    <a href="/user/1/post/1" class="my_success_btn">Read More</a>
+                    <a href="/user/{{user.id}}/post/{{id}}" class="my_success_btn">Read More</a>
                 </div>
             </div>
         </div>
+        {{/postRespDto.posts.content}}
 
     </div>
 

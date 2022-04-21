@@ -2,6 +2,8 @@ package site.metacoding.blogv3.web;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,6 @@ import site.metacoding.blogv3.config.auth.LoginUser;
 import site.metacoding.blogv3.domain.category.Category;
 import site.metacoding.blogv3.handler.ex.CustomException;
 import site.metacoding.blogv3.service.PostService;
-import site.metacoding.blogv3.util.Script;
 import site.metacoding.blogv3.web.dto.post.PostRespDto;
 import site.metacoding.blogv3.web.dto.post.PostWriteReqDto;
 
@@ -48,11 +49,20 @@ public class PostController {
     }
 
     @GetMapping("/user/{id}/post")
-    public String postList(@PathVariable Integer id, @AuthenticationPrincipal LoginUser loginUser, Model model) {
-
+    public String postList(Integer categoryId, @PathVariable Integer id,
+            @AuthenticationPrincipal LoginUser loginUser,
+            Model model,
+            @PageableDefault(size = 3) Pageable pageable) {
         // SELECT * FROM category WHERE userId = :id
         // 카테고리 가져가세요!!
-        PostRespDto postRespDto = postService.게시글목록보기(id);
+        PostRespDto postRespDto = null;
+
+        if (categoryId == null) {
+            postRespDto = postService.게시글목록보기(id, pageable);
+        } else {
+            postRespDto = postService.게시글카테고리별보기(id, categoryId, pageable);
+        }
+
         model.addAttribute("postRespDto", postRespDto);
         return "/post/list";
     }
