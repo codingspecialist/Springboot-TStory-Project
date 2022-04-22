@@ -32,6 +32,16 @@
         </div>
         {{/postRespDto.posts.content}}
 
+
+        <div class="my_paging">
+
+            <a href="/user/{{postRespDto.userId}}/post?page={{postRespDto.prev}}">이전</a>
+            {{#postRespDto.pageNumbers}}
+            <a href="/user/{{postRespDto.userId}}/post?page={{.}}">{{.}}</a>
+            {{/postRespDto.pageNumbers}}
+            <a href="/user/{{postRespDto.userId}}/post?page={{postRespDto.next}}">다음</a>
+
+        </div>
     </div>
 
 </div>

@@ -16,4 +16,8 @@ import site.metacoding.blogv3.domain.post.Post;
 public class PostRespDto {
     private Page<Post> posts;
     private List<Category> categorys;
+    private Integer userId;
+    private Integer prev;
+    private Integer next;
+    private List<Integer> pageNumbers;
 }
