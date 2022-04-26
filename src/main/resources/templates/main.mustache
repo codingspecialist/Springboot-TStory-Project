@@ -1,7 +1,45 @@
 {{>/layout/main-header}}
 
 <div class="container">
-    <h3>메인페이지입니다</h3>
+
+    <div class="my_main_list">
+
+        {{#posts}}
+        <!-- 아이템 시작 -->
+        <div class="my_main_item">
+            <a href="/post/{{id}}" class="my_atag_none">
+                <div class="my_main_item_thumnail">
+                    {{#thumnail}}
+                    <img src="/upload/{{thumnail}}" width="100%" height="100%">
+                    {{/thumnail}}
+                    {{^thumnail}}
+                    <div class="my_fakeimg"> </div>
+                    {{/thumnail}}
+                </div>
+                <div class="my_main_content my_p_sm_1">
+                    <div class="my_main_item_title">
+                        <h3>{{title}}</h3>
+                    </div>
+                    <div class="my_main_item_summary my_mb_sm_1 my_text_two_line">
+                        {{{formatContent}}}
+                    </div>
+                    <div class="my_main_item_date my_mb_sm_1">
+                        {{formatCreateDate}}
+                    </div>
+            </a>
+            <a href="/user/{{user.id}}/post" class="my_atag_none">
+                <div class="my_main_item_username">
+                    <span>by </span>
+                    <b>{{user.username}}</b>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- 아이템 끝 -->
+    {{/posts}}
+
+</div>
+
 </div>
 
 {{>/layout/footer}}
