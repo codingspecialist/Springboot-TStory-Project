@@ -1,3 +1,12 @@
+.my_paging_number_box {
+    outline: 1px solid rgb(185, 185, 185);
+    padding: 0 5px;
+}
+
+.my_paging_number_box:hover {
+    background-color: rgb(30, 180, 159);
+}
+
 .my_post_list_item {
     display: flex;
     border: 1px solid rgb(185, 185, 185);
