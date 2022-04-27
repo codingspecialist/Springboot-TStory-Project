@@ -57,8 +57,8 @@ public class PostController {
         return "/post/writeForm";
     }
 
-    @GetMapping("/user/{id}/post")
-    public String postList(Integer categoryId, @PathVariable Integer id,
+    @GetMapping("/user/{pageOwnerId}/post")
+    public String postList(Integer categoryId, @PathVariable Integer pageOwnerId,
             @AuthenticationPrincipal LoginUser loginUser,
             Model model,
             @PageableDefault(size = 3) Pageable pageable) {
@@ -67,9 +67,9 @@ public class PostController {
         PostRespDto postRespDto = null;
 
         if (categoryId == null) {
-            postRespDto = postService.게시글목록보기(id, pageable);
+            postRespDto = postService.게시글목록보기(pageOwnerId, pageable);
         } else {
-            postRespDto = postService.게시글카테고리별보기(id, categoryId, pageable);
+            postRespDto = postService.게시글카테고리별보기(pageOwnerId, categoryId, pageable);
         }
 
         model.addAttribute("postRespDto", postRespDto);

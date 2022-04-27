@@ -23,13 +23,18 @@
 
 <body class="drawer drawer--left">
 
-    <nav class="drawer-nav" role="navigation">
+    <nav class="drawer-nav my_nav_slider" role="navigation">
         <ul class="drawer-menu">
             <li><a class="drawer-brand" href="/">Home</a></li>
             {{#postRespDto.categorys}}
             <li><a class="drawer-menu-item" href="/user/{{user.id}}/post?categoryId={{id}}">{{title}}</a></li>
             {{/postRespDto.categorys}}
         </ul>
+
+        <div class="my_nav_slider_visit">
+            <div>방문자수 : 80</div>
+            <i class="fa-solid fa-camera"></i>
+        </div>
     </nav>
 
     <nav class="navbar navbar-expand-sm my_navbar">
