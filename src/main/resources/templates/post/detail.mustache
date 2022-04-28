@@ -1,7 +1,7 @@
 {{>/layout/main-header}}
 
 <div class="container">
-
+    <input id="id" type="hidden" value="{{post.id}}"/>
     <div class="my_post_detail_title">
         <h2>{{post.title}}</h2>
     </div>
@@ -13,9 +13,33 @@
 
     <div>
         <a class="btn btn-outline-success" href="#">수정</a>
-        <button class="btn btn-outline-danger">삭제</button>
+        <button id="btn-delete" class="btn btn-outline-danger">삭제</button>
     </div>
     <br />
 </div>
+
+<script>
+    // 게시글 삭제, 권한체크 후 삭제 /s/post/1
+    $("#btn-delete").click(()=>{
+        postDelete();
+    });
+
+    let postDelete = async() => {
+
+        let id = $("#id").val();
+
+        let response = await fetch(`/s/api/post/${id}`,{
+            method: "DELETE"
+        });
+
+        if(response.status == 200){
+            alert("삭제성공");
+            location.href = "/";
+        } else {
+            alert("삭제실패");
+        }
+    };
+
+</script>
 
 {{>/layout/footer}}

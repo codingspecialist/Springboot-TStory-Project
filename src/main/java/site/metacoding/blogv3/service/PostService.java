@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +20,7 @@ import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.domain.user.UserRepository;
 import site.metacoding.blogv3.domain.visit.Visit;
 import site.metacoding.blogv3.domain.visit.VisitRepository;
+import site.metacoding.blogv3.handler.ex.CustomApiException;
 import site.metacoding.blogv3.handler.ex.CustomException;
 import site.metacoding.blogv3.util.UtilFileUpload;
 import site.metacoding.blogv3.web.dto.post.PostRespDto;
@@ -41,6 +40,27 @@ public class PostService {
     private final CategoryRepository categoryRepository;
     private final VisitRepository visitRepository;
     private final UserRepository userRepository;
+
+    @Transactional
+    public void 게시글삭제(Integer id, User principal) {
+
+        Optional<Post> postOp = postRepository.findById(id);
+
+        if (postOp.isPresent()) {
+            Post postEntity = postOp.get();
+
+            // 권한 체크
+            if (principal.getId() == postEntity.getUser().getId()) {
+
+                postRepository.deleteById(id);
+            } else {
+                throw new CustomApiException("삭제 권한이 없습니다");
+            }
+        } else {
+            throw new CustomApiException("해당 게시글이 존재하지 않습니다");
+        }
+
+    }
 
     @Transactional
     public Post 게시글상세보기(Integer id) {
