@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import site.metacoding.blogv3.domain.category.Category;
 import site.metacoding.blogv3.domain.post.Post;
+import site.metacoding.blogv3.domain.visit.Visit;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,4 +21,5 @@ public class PostRespDto {
     private Integer prev;
     private Integer next;
     private List<Integer> pageNumbers;
+    private Long totalCount;
 }
