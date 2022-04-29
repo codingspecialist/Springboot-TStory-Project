@@ -109,7 +109,7 @@ public class PostService {
         // 해당 페이지의 postId를 찾아서!
         Integer postId = id;
 
-        // 해당 페이지의 주인 userId가 무엇인지 알아야함.
+        // 해당 페이지의 주인 userId가 무엇인지 알아야함.~~~~
         Integer pageOwnerId = null;
 
         // 로그인한 사용자의 userId를 알아야 함.
