@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import site.metacoding.blogv3.domain.post.Post;
 import site.metacoding.blogv3.domain.post.PostRepository;
-import site.metacoding.blogv3.util.UtilPost;
 
 @Slf4j
 @RequiredArgsConstructor
