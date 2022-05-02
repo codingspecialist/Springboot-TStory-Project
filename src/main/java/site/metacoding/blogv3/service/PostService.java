@@ -23,6 +23,7 @@ import site.metacoding.blogv3.domain.visit.VisitRepository;
 import site.metacoding.blogv3.handler.ex.CustomApiException;
 import site.metacoding.blogv3.handler.ex.CustomException;
 import site.metacoding.blogv3.util.UtilFileUpload;
+import site.metacoding.blogv3.util.UtilPost;
 import site.metacoding.blogv3.web.dto.post.PostDetailRespDto;
 import site.metacoding.blogv3.web.dto.post.PostRespDto;
 import site.metacoding.blogv3.web.dto.post.PostWriteReqDto;
@@ -45,20 +46,16 @@ public class PostService {
     @Transactional
     public void 게시글삭제(Integer id, User principal) {
 
-        Optional<Post> postOp = postRepository.findById(id);
+        // 게시글 확인.
+        Post postEntity = UtilPost.postFindById(id);
 
-        if (postOp.isPresent()) {
-            Post postEntity = postOp.get();
+        // 권한 체크
+        if (UtilPost.Authcheck(postEntity.getId(), principal.getId())) {
 
-            // 권한 체크
-            if (principal.getId() == postEntity.getUser().getId()) {
-
-                postRepository.deleteById(id);
-            } else {
-                throw new CustomApiException("삭제 권한이 없습니다");
-            }
+            // 게시글 삭제
+            postRepository.deleteById(id);
         } else {
-            throw new CustomApiException("해당 게시글이 존재하지 않습니다");
+            throw new CustomApiException("삭제 권한이 없습니다");
         }
 
     }
@@ -67,86 +64,38 @@ public class PostService {
     public PostDetailRespDto 게시글상세보기(Integer id) {
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
 
-        Optional<Post> postOp = postRepository.findById(id);
+        // 게시글 찾기
+        Post postEntity = UtilPost.postFindById(id);
 
-        if (postOp.isPresent()) {
-            Post postEntity = postOp.get();
-            postDetailRespDto.setPost(postEntity);
+        // 방문자수 증가
+        UtilPost.visitIncrease(postEntity.getUser().getId());
 
-            postDetailRespDto.setPageOwner(false);
+        // 리턴값 만들기.
+        postDetailRespDto.setPost(postEntity);
+        postDetailRespDto.setPageOwner(false);
 
-            // 방문자 카운터 증가
-            Optional<Visit> visitOp = visitRepository.findById(postEntity.getUser().getId());
-            if (visitOp.isPresent()) {
-                Visit visitEntity = visitOp.get();
-                Long totalCount = visitEntity.getTotalCount();
-                visitEntity.setTotalCount(totalCount + 1);
-            } else {
-                log.error("미친 심각", "회원가입할때 Visit이 안 만들어지는 심각한 오류가 있습니다.");
-                // sms 메시지 전송
-                // email 전송
-                // file 쓰기
-                throw new CustomException("일시적 문제가 생겼습니다. 관리자에게 문의해주세요.");
-            }
-            return postDetailRespDto;
-        } else {
-            throw new CustomException("해당 게시글을 찾을 수 없습니다");
-        }
+        return postDetailRespDto;
     }
 
     @Transactional
     public PostDetailRespDto 게시글상세보기(Integer id, User principal) {
-        // 1. 권한체크
-
-        // 2. 게시글 가져오기
-
-        // 3. 방문자수 증가하기
-
-        // 4. 리턴값 만들기
 
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
 
-        // 해당 페이지의 postId를 찾아서!
-        Integer postId = id;
+        // 게시글 가져오기
+        Post postEntity = UtilPost.postFindById(id);
 
-        // 해당 페이지의 주인 userId가 무엇인지 알아야함.~~~~
-        Integer pageOwnerId = null;
+        // 권한체크
+        boolean isAuth = UtilPost.Authcheck(postEntity.getId(), principal.getId());
 
-        // 로그인한 사용자의 userId를 알아야 함.
-        Integer loginUserId = principal.getId();
+        // 방문자수 증가하기
+        UtilPost.visitIncrease(postEntity.getUser().getId());
 
-        Optional<Post> postOp = postRepository.findById(id);
+        // 리턴값 만들기
+        postDetailRespDto.setPost(postEntity);
+        postDetailRespDto.setPageOwner(isAuth);
 
-        if (postOp.isPresent()) {
-            Post postEntity = postOp.get();
-            postDetailRespDto.setPost(postEntity);
-
-            pageOwnerId = postEntity.getUser().getId();
-
-            // 두 값을 비교해서 동일하면 isPageOwner에 true를 추가해준다.
-            if (pageOwnerId == loginUserId) {
-                postDetailRespDto.setPageOwner(true);
-            } else {
-                postDetailRespDto.setPageOwner(false);
-            }
-
-            // 방문자 카운터 증가
-            Optional<Visit> visitOp = visitRepository.findById(postEntity.getUser().getId());
-            if (visitOp.isPresent()) {
-                Visit visitEntity = visitOp.get();
-                Long totalCount = visitEntity.getTotalCount();
-                visitEntity.setTotalCount(totalCount + 1);
-            } else {
-                log.error("미친 심각", "회원가입할때 Visit이 안 만들어지는 심각한 오류가 있습니다.");
-                // sms 메시지 전송
-                // email 전송
-                // file 쓰기
-                throw new CustomException("일시적 문제가 생겼습니다. 관리자에게 문의해주세요.");
-            }
-            return postDetailRespDto;
-        } else {
-            throw new CustomException("해당 게시글을 찾을 수 없습니다");
-        }
+        return postDetailRespDto;
     }
 
     public List<Category> 게시글쓰기화면(User principal) {
@@ -196,28 +145,7 @@ public class PostService {
                 0L);
 
         // 방문자 카운터 증가
-        Optional<User> pageOwnerOp = userRepository.findById(pageOwnerId);
-
-        if (pageOwnerOp.isPresent()) {
-            User pageOwnerEntity = pageOwnerOp.get();
-            Optional<Visit> visitOp = visitRepository.findById(pageOwnerEntity.getId());
-            if (visitOp.isPresent()) {
-                Visit visitEntity = visitOp.get();
-                // Dto에 방문자수 담기 (request에서 ip주소 받아서 동일하면 증가 안시키는 로직이 필요함)
-                postRespDto.setTotalCount(visitEntity.getTotalCount());
-
-                Long totalCount = visitEntity.getTotalCount();
-                visitEntity.setTotalCount(totalCount + 1);
-            } else {
-                log.error("미친 심각", "회원가입할때 Visit이 안 만들어지는 심각한 오류가 있습니다.");
-                // sms 메시지 전송
-                // email 전송
-                // file 쓰기
-                throw new CustomException("일시적 문제가 생겼습니다. 관리자에게 문의해주세요.");
-            }
-        } else {
-            throw new CustomException("해당 블로그는 없는 페이지입니다.");
-        }
+        UtilPost.visitIncrease(pageOwnerId);
 
         return postRespDto;
     }
@@ -240,28 +168,7 @@ public class PostService {
                 0L);
 
         // 방문자 카운터 증가
-        Optional<User> pageOwnerOp = userRepository.findById(pageOwnerId);
-
-        if (pageOwnerOp.isPresent()) {
-            User pageOwnerEntity = pageOwnerOp.get();
-            Optional<Visit> visitOp = visitRepository.findById(pageOwnerEntity.getId());
-            if (visitOp.isPresent()) {
-                Visit visitEntity = visitOp.get();
-                // Dto에 방문자수 담기 (request에서 ip주소 받아서 동일하면 증가 안시키는 로직이 필요함)
-                postRespDto.setTotalCount(visitEntity.getTotalCount());
-
-                Long totalCount = visitEntity.getTotalCount();
-                visitEntity.setTotalCount(totalCount + 1);
-            } else {
-                log.error("미친 심각", "회원가입할때 Visit이 안 만들어지는 심각한 오류가 있습니다.");
-                // sms 메시지 전송
-                // email 전송
-                // file 쓰기
-                throw new CustomException("일시적 문제가 생겼습니다. 관리자에게 문의해주세요.");
-            }
-        } else {
-            throw new CustomException("해당 블로그는 없는 페이지입니다.");
-        }
+        UtilPost.visitIncrease(pageOwnerId);
 
         return postRespDto;
     }
