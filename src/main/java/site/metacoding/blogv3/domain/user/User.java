@@ -38,6 +38,9 @@ public class User {
     @Column(length = 60, nullable = false)
     private String email;
 
+    @Column(nullable = true)
+    private String profileImg;
+
     @CreatedDate // insert 할때만 동작
     private LocalDateTime createDate;
     @LastModifiedDate // update 할때만 동작
