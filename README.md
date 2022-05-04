@@ -81,6 +81,7 @@ updateDate
 - 배포
 - 검색
 - 프로필 사진 변경
+[사진업로드 코드](https://github.com/codingspecialist/Eazyup-Photogram/blob/master/src/main/resources/static/js/profile.js)
 - 글수정
 - 회원정보 수정
 
