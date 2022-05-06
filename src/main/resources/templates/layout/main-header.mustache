@@ -40,8 +40,19 @@
 
         {{#principal}}
         <div class="dropdown dropleft">
-            <img id="profile-img-btn" src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
-                class="my_profile_rounded_img_btn dropdown-toggle" data-toggle="dropdown">
+
+
+            <div data-toggle="dropdown">
+                {{#profileImg}}
+                <img id="profile-img-btn" src="/upload/{{profileImg}}"
+                    class="my_profile_rounded_img_btn dropdown-toggle">
+                {{/profileImg}}
+                {{^profileImg}}
+                <img id="profile-img-btn" src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
+                    class="my_profile_rounded_img_btn dropdown-toggle">
+                {{/profileImg}}
+            </div>
+
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="/user/{{id}}/post">내블로그</a>
                 <a class="dropdown-item" href="/s/user/{{id}}">계정관리</a>
