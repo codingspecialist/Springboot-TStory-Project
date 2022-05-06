@@ -2,6 +2,7 @@ package site.metacoding.blogv3.web;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.service.UserService;
+import site.metacoding.blogv3.util.UtilFileUpload;
 import site.metacoding.blogv3.util.UtilValid;
 import site.metacoding.blogv3.web.dto.user.JoinReqDto;
 import site.metacoding.blogv3.web.dto.user.PasswordResetReqDto;
@@ -21,6 +25,16 @@ import site.metacoding.blogv3.web.dto.user.PasswordResetReqDto;
 public class UserController {
 
     private final UserService userService;
+
+    @Value("${file.path}")
+    private String uploadFolder;
+
+    @PutMapping("/s/api/user/{id}/profile-img")
+    public ResponseEntity<?> profileImgUpdate(MultipartFile profileImg) {
+        // UtilFileUpload.write(uploadFolder, profileImg);
+        // userService.프로파일이미지변경();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @GetMapping("/login-form")
     public String loginForm() {
