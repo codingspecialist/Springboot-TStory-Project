@@ -9,7 +9,7 @@
                 <img src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
                     class="my_profile_rounded_img_btn_lg" id="profile-img-btn_lg">
                 <form id="fileForm">
-                    <input type="file" class="my_hidden" id="profile-img-input" name="profileImg" />
+                    <input type="file" class="my_hidden" id="profile-img-input" name="profileImgFile" />
                 </form>
             </div>
             <div class="my_error_box my_hidden">
@@ -72,13 +72,13 @@
         });
 
         if (response.status == 200) {
-            imgPreview(event);
+            imgPreview(event, f);
         } else {
             alert("프로파일 변경에 실패하였습니다");
         }
     }
 
-    function imgPreview(event) {
+    function imgPreview(event, f) {
         let reader = new FileReader();
 
         // 콜백 (파일 이미지가 객체화 되면!!)
