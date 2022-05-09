@@ -74,7 +74,7 @@
         let fileForm = $("#fileForm")[0];
         let formData = new FormData(fileForm);
 
-        let response = await fetch(`/s/api/user/${userId}/profile-img`, {
+        let response = await fetch(`/s/api/user/profile-img`, {
             method: "put",
             body: formData
         });

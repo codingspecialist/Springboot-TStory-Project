@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://kit.fontawesome.com/6b3377d2bb.js" crossorigin="anonymous"></script>
+    <style>
+        .item_box {
+            border: 1px solid black;
+            padding: 20px;
+        }
+
+        .item {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item_box">
+        <div class="item">
+            1: <i class="fa-solid fa-heart my_fake_like" id="h-1" onclick="postLikeClick(1)"></i>
+        </div>
+        <div class="item">
+            2: <i class="fa-solid fa-heart my_fake_like" id="h-2" onclick="postLikeClick(2)"></i>
+        </div>
+        <div class="item">
+            3: <i class="far fa-heart" id="h-3" onclick="postLikeClick(3)"></i>
+        </div>
+    </div>
+
+    <script>
+        function postLikeClick(id) {
+            let isLike = $(`#h-${id}`).hasClass("my_fake_like");
+            if (isLike) {
+                postUnLike(id);
+            } else {
+                postLike(id);
+            }
+        }
+
+        function postLike(id) {
+            alert("좋아요");
+            // fetch();
+            $(`#h-${id}`).addClass("my_fake_like");
+            $(`#h-${id}`).removeClass("far");
+            $(`#h-${id}`).addClass("fa-solid");
+        }
+
+        function postUnLike(id) {
+            alert("좋아요 취소");
+            // fetch();
+            $(`#h-${id}`).removeClass("my_fake_like");
+            $(`#h-${id}`).removeClass("fa-solid");
+            $(`#h-${id}`).addClass("far");
+        }
+    </script>
+</body>
+
+</html>

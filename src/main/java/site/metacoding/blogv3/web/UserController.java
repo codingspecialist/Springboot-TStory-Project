@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.config.auth.LoginUser;
+import site.metacoding.blogv3.handler.ex.CustomApiException;
 import site.metacoding.blogv3.service.UserService;
 import site.metacoding.blogv3.util.UtilFileUpload;
 import site.metacoding.blogv3.util.UtilValid;
@@ -30,10 +31,12 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
-    @PutMapping("/s/api/user/{id}/profile-img")
+    @PutMapping("/s/api/user/profile-img")
     public ResponseEntity<?> profileImgUpdate(
             @AuthenticationPrincipal LoginUser loginUser,
             MultipartFile profileImgFile) {
+        // 위에서 받은 id를 사용하면 세션값과 비교해서 권한체크를 해줘야 한다.
+        // 그냥 세션값을 사용하면 권한체크 필요없음.
 
         // 세션값 변경
         userService.프로파일이미지변경(loginUser.getUser(), profileImgFile, session);
