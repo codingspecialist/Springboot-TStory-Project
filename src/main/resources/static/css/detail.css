@@ -1,4 +1,19 @@
 
+.my_fake_like {
+    color: red;
+    cursor: pointer;
+}
+.my_fake_un_like{
+    color: red;
+    cursor: pointer;
+}
+
+.my_post_info {
+    border: 1px solid rgb(185, 185, 185);
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+
 .my_post_detail_title {
     overflow: hidden;
 }

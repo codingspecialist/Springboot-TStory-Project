@@ -12,8 +12,12 @@
     <div class="my_post_detail_content">
         {{{data.post.content}}}
     </div>
-    <div>
-
+    <div class="my_post_info_box d-flex">
+        <div class="my_post_info">
+            <i class="fa-solid fa-heart my_fake_like my_mr_sm_1" id="heart-{{data.post.id}}"
+                onclick="postLikeClick('{{data.post.id}}')"></i>
+            by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
+        </div>
     </div>
 
     {{#data.isPageOwner}}
