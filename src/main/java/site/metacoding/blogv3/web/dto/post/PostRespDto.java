@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import site.metacoding.blogv3.domain.category.Category;
 import site.metacoding.blogv3.domain.post.Post;
-import site.metacoding.blogv3.domain.visit.Visit;
 
 @AllArgsConstructor
 @NoArgsConstructor

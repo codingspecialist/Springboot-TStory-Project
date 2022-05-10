@@ -14,14 +14,22 @@
     </div>
     <div class="my_post_info_box d-flex">
         <div class="my_post_info">
+            {{#data.isLove}}
             <i class="fa-solid fa-heart my_fake_like my_mr_sm_1" id="heart-{{data.post.id}}"
                 onclick="postLikeClick('{{data.post.id}}')"></i>
             by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
+            {{/data.isLove}}
+            {{^data.isLove}}
+            <i class="far fa-heart my_fake_un_like my_mr_sm_1" id="heart-{{data.post.id}}"
+                onclick="postLikeClick('{{data.post.id}}')"></i>
+            by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
+            {{/data.isLove}}
+
         </div>
     </div>
 
     {{#data.isPageOwner}}
-    <div>
+    <div class="my_mt_md_1">
         <a class="btn btn-outline-success" href="#">수정</a>
         <button id="btn-delete" class="btn btn-outline-danger">삭제</button>
     </div>
