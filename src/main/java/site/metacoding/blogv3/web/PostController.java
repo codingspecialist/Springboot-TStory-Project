@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.config.auth.LoginUser;
 import site.metacoding.blogv3.domain.category.Category;
+import site.metacoding.blogv3.domain.love.Love;
 import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.handler.ex.CustomException;
 import site.metacoding.blogv3.service.PostService;
@@ -33,14 +34,18 @@ public class PostController {
     // PostService 사용하세요. 이유는 나중에 category, post글 다 같이 가지고 가야 하기 때문임!!
 
     // /s/api/post/{id}/love
-    @PostMapping("/s/api/post/{id}/love")
-    public ResponseEntity<?> love(@PathVariable Integer id, @AuthenticationPrincipal LoginUser loginUser) {
-        return null;
+    @PostMapping("/s/api/post/{postId}/love")
+    public ResponseEntity<?> love(@PathVariable Integer postId, @AuthenticationPrincipal LoginUser loginUser) {
+        Love loveEntity = postService.좋아요(postId, loginUser.getUser());
+        return new ResponseEntity<>(loveEntity, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/s/api/post/{id}/love")
-    public ResponseEntity<?> unLove(@PathVariable Integer id, @AuthenticationPrincipal LoginUser loginUser) {
-        return null;
+    @DeleteMapping("/s/api/post/{postId}/love/{loveId}")
+    public ResponseEntity<?> unLove(@PathVariable Integer loveId, @AuthenticationPrincipal LoginUser loginUser) {
+        // 로그인한 유저의 userId
+        // 러브에 있는 userId
+        postService.좋아요취소(loveId, loginUser.getUser());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/s/api/post/{id}")

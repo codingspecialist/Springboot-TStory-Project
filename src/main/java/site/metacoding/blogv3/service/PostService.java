@@ -47,11 +47,30 @@ public class PostService {
     private final LoveRepository loveRepository;
     private final EntityManager em; // IoC 컨테이너에서 가져옴.
 
+    @Transactional
+    public Love 좋아요(Integer postId, User principal) {
+
+        // 숙제 Love를 Dto에 옮겨서 비영속화된 데이터를 응답하기
+        Post postEntity = postFindById(postId);
+
+        Love love = new Love();
+        love.setUser(principal);
+        love.setPost(postEntity);
+        return loveRepository.save(love);
+    }
+
+    @Transactional
+    public void 좋아요취소(Integer loveId, User principal) {
+        // 권한체크
+        loveFindById(loveId);
+        loveRepository.deleteById(loveId);
+    }
+
     @Transactional(rollbackFor = CustomApiException.class)
     public void 게시글삭제(Integer id, User principal) {
 
         // 게시글 확인.
-        Post postEntity = basicFindById(id);
+        Post postEntity = postFindById(id);
 
         // 권한 체크
         if (authCheck(postEntity.getUser().getId(), principal.getId())) { // 이 부분 페이지 주인 아이디
@@ -69,7 +88,7 @@ public class PostService {
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
 
         // 게시글 찾기
-        Post postEntity = basicFindById(id);
+        Post postEntity = postFindById(id);
 
         // 방문자수 증가
         visitIncrease(postEntity.getUser().getId());
@@ -90,7 +109,7 @@ public class PostService {
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
 
         // 게시글 찾기
-        Post postEntity = basicFindById(id);
+        Post postEntity = postFindById(id);
 
         // 권한체크
         boolean isAuth = authCheck(postEntity.getUser().getId(), principal.getId());
@@ -191,8 +210,19 @@ public class PostService {
         return postRespDto;
     }
 
+    // 좋아요 한건 찾기
+    private Love loveFindById(Integer loveId) {
+        Optional<Love> loveOp = loveRepository.findById(loveId);
+        if (loveOp.isPresent()) {
+            Love loveEntity = loveOp.get();
+            return loveEntity;
+        } else {
+            throw new CustomApiException("해당 좋아요가 존재하지 않습니다");
+        }
+    }
+
     // 게시글 한건 찾기
-    private Post basicFindById(Integer postId) {
+    private Post postFindById(Integer postId) {
         Optional<Post> postOp = postRepository.findById(postId);
         if (postOp.isPresent()) {
             Post postEntity = postOp.get();
