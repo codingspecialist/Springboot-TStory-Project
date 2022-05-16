@@ -18,6 +18,7 @@ async function postLike(id) {
 
     let responseParse = await response.json();
 
+
     if (response.status == 201) {
         $(`#heart-${id}`).addClass("my_fake_like");
         $(`#heart-${id}`).removeClass("my_fake_un_like");
