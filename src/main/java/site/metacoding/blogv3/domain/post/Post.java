@@ -51,7 +51,7 @@ public class Post {
     private User user;
 
     @JoinColumn(name = "categoryId")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Category category;
 
     @CreatedDate // insert 할때만 동작

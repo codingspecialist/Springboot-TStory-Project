@@ -21,6 +21,7 @@ import site.metacoding.blogv3.domain.love.Love;
 import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.handler.ex.CustomException;
 import site.metacoding.blogv3.service.PostService;
+import site.metacoding.blogv3.web.dto.love.LoveRespDto;
 import site.metacoding.blogv3.web.dto.post.PostDetailRespDto;
 import site.metacoding.blogv3.web.dto.post.PostRespDto;
 import site.metacoding.blogv3.web.dto.post.PostWriteReqDto;
@@ -36,8 +37,8 @@ public class PostController {
     // /s/api/post/{id}/love
     @PostMapping("/s/api/post/{postId}/love")
     public ResponseEntity<?> love(@PathVariable Integer postId, @AuthenticationPrincipal LoginUser loginUser) {
-        Love loveEntity = postService.좋아요(postId, loginUser.getUser());
-        return new ResponseEntity<>(loveEntity, HttpStatus.CREATED);
+        LoveRespDto dto = postService.좋아요(postId, loginUser.getUser());
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/s/api/post/{postId}/love/{loveId}")
