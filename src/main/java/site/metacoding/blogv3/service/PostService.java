@@ -96,6 +96,7 @@ public class PostService {
 
     }
 
+    // 비로그인 상태일 때 상세보기
     @Transactional
     public PostDetailRespDto 게시글상세보기(Integer id) {
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
@@ -117,6 +118,7 @@ public class PostService {
         return postDetailRespDto;
     }
 
+    // 로그인 상태일 때 상세보기
     @Transactional
     public PostDetailRespDto 게시글상세보기(Integer id, User principal) {
 
@@ -143,7 +145,6 @@ public class PostService {
             postDetailRespDto.setLoveId(loveEntity.getId());
             postDetailRespDto.setLove(true);
         } else {
-            postDetailRespDto.setLoveId(0);
             postDetailRespDto.setLove(false);
         }
 

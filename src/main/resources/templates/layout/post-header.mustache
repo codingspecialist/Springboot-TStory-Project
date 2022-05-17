@@ -23,6 +23,10 @@
 
 <body class="drawer drawer--left">
 
+    {{#principal}}
+    <input type="hidden" id="principal-id" value="{{id}}" />
+    {{/principal}}
+
     <nav class="drawer-nav my_nav_slider" role="navigation">
         <ul class="drawer-menu">
             <li><a class="drawer-brand" href="/">Home</a></li>

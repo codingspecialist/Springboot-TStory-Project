@@ -3,6 +3,8 @@
 <div class="container">
     <input id="postId" type="hidden" value="{{data.post.id}}" />
     <input id="pageOwnerId" type="hidden" value="{{data.post.user.id}}" />
+    <input id="my-loveId" type="hidden" value="{{#data.loveId}} {{data.loveId}} {{/data.loveId}}">
+
 
     <div class="my_post_detail_title">
         <h2>{{data.post.title}}</h2>
@@ -20,12 +22,10 @@
             by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
             {{/data.isLove}}
             {{^data.isLove}}
-            <i class="far fa-heart my_fake_un_like my_mr_sm_1" id="heart-{{data.post.id}}"
+            <i class="far fa-heart my_fake_un_like my_mr_sm_1" id="my-heart"
                 onclick="postLikeClick('{{data.post.id}}')"></i>
             by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
             {{/data.isLove}}
-            <input id="loveId" type="hidden" value="{{data.loveId}}">
-
         </div>
     </div>
 
