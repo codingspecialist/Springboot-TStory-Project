@@ -24,6 +24,7 @@
                 onclick="postLikeClick('{{data.post.id}}')"></i>
             by <b>{{data.post.user.username}}</b> <span class="my_text_body_sm">{{data.post.formatCreateDate}}</span>
             {{/data.isLove}}
+            <input id="loveId" type="hidden" value="{{data.loveId}}">
 
         </div>
     </div>
