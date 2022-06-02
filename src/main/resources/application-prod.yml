@@ -37,3 +37,8 @@ spring:
 
 file:
   path: /home/ubuntu/upload/
+
+logging:
+  level:
+    '[org.springframework.web]': INFO
+    '[org.hibernate]': INFO
