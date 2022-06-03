@@ -13,11 +13,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
@@ -45,5 +44,17 @@ public class User {
     private LocalDateTime createDate;
     @LastModifiedDate // update 할때만 동작
     private LocalDateTime updateDate;
+
+    @Builder
+    public User(Integer id, String username, String password, String email, String profileImg, LocalDateTime createDate,
+            LocalDateTime updateDate) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.profileImg = profileImg;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 
 }
