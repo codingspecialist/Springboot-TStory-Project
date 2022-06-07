@@ -3,7 +3,6 @@ package site.metacoding.blogv3.web;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,9 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.config.auth.LoginUser;
-import site.metacoding.blogv3.handler.ex.CustomApiException;
 import site.metacoding.blogv3.service.UserService;
-import site.metacoding.blogv3.util.UtilFileUpload;
+import site.metacoding.blogv3.util.UtilSysout;
 import site.metacoding.blogv3.util.UtilValid;
 import site.metacoding.blogv3.web.dto.user.JoinReqDto;
 import site.metacoding.blogv3.web.dto.user.PasswordResetReqDto;
@@ -30,6 +28,8 @@ public class UserController {
 
     private final UserService userService;
     private final HttpSession session;
+
+    private static final String TAG = "UserController : ";
 
     @PutMapping("/s/api/user/profile-img")
     public ResponseEntity<?> profileImgUpdate(

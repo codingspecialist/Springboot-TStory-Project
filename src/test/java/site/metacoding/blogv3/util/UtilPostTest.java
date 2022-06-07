@@ -1,4 +1,4 @@
-package site.metacoding.blogv3;
+package site.metacoding.blogv3.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
