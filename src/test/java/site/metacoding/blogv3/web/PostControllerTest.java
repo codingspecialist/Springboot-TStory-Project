@@ -1,19 +1,19 @@
 package site.metacoding.blogv3.web;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -38,7 +38,8 @@ public class PostControllerTest {
 
     // WithMockUser는 간단한 인증만 통과하고 싶을 때 사용!!
     // 만약에 세션에 있는 값을 내부에서 사용해야 하면? -> 다른 것을 써야 함.
-    @WithMockUser // username="username" password="password"
+    // @WithMockUser // username="username" password="password"
+    @WithUserDetails("ssar")
     @Test
     public void write_테스트() throws Exception {
         // given
@@ -53,13 +54,12 @@ public class PostControllerTest {
                 post("/s/post")
                         .param("title", postWriteReqDto.getTitle())
                         .param("content", postWriteReqDto.getContent())
-                        .param("categoryId", postWriteReqDto.getCategoryId() + ""));
+                        .param("categoryId", postWriteReqDto.getCategoryId() + "")
+                        .param("thumnailFile", ""));
 
         // then
         resultActions
                 .andDo(MockMvcResultHandlers.print());
-        //
-
     }
 
 }
