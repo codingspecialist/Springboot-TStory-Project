@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 import site.metacoding.blogv3.web.dto.post.PostWriteReqDto;
 
 @ActiveProfiles("test")
@@ -42,6 +41,11 @@ public class PostControllerTest {
     @WithUserDetails("ssar")
     @Test
     public void write_테스트() throws Exception {
+
+        // Authentication authentication =
+        // SecurityContextHolder.getContext().getAuthentication();
+        // LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+
         // given
         PostWriteReqDto postWriteReqDto = PostWriteReqDto.builder()
                 .categoryId(1) // 이거 분명히 터짐
@@ -59,6 +63,7 @@ public class PostControllerTest {
 
         // then
         resultActions
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
                 .andDo(MockMvcResultHandlers.print());
     }
 

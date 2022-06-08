@@ -1,5 +1,8 @@
 # 스프링부트 JPA 블로그 V3 - GREEN Computer
 
+### 시큐리티 테스트 시 주의할 점
+- https://jaewon2336.tistory.com/442 
+
 ### 1. 의존성
 - devtools
 - spring web (mvc)
