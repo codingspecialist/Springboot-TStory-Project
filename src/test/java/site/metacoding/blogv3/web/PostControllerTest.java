@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import site.metacoding.blogv3.web.dto.post.PostWriteReqDto;
 
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PostControllerTest {
 
@@ -36,7 +36,9 @@ public class PostControllerTest {
                 .build();
     }
 
-    // @WithMockUser
+    // WithMockUser는 간단한 인증만 통과하고 싶을 때 사용!!
+    // 만약에 세션에 있는 값을 내부에서 사용해야 하면? -> 다른 것을 써야 함.
+    @WithMockUser // username="username" password="password"
     @Test
     public void write_테스트() throws Exception {
         // given
@@ -47,7 +49,11 @@ public class PostControllerTest {
                 .build();
 
         // when
-        ResultActions resultActions = mockMvc.perform(post("/s/post"));
+        ResultActions resultActions = mockMvc.perform(
+                post("/s/post")
+                        .param("title", postWriteReqDto.getTitle())
+                        .param("content", postWriteReqDto.getContent())
+                        .param("categoryId", postWriteReqDto.getCategoryId() + ""));
 
         // then
         resultActions

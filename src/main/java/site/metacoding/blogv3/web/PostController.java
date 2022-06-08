@@ -78,9 +78,26 @@ public class PostController {
     @PostMapping("/s/post")
     public String write(PostWriteReqDto postWriteReqDto, @AuthenticationPrincipal LoginUser loginUser) {
 
-        postService.게시글쓰기(postWriteReqDto, loginUser.getUser());
+        // postService.게시글쓰기(postWriteReqDto, loginUser.getUser());
 
-        return "redirect:/user/" + loginUser.getUser().getId() + "/post";
+        // return "redirect:/user/" + loginUser.getUser().getId() + "/post";
+
+        // LoginUser 테스트 시작
+        System.out.println("=======================");
+        System.out.println(loginUser.getUsername());
+        System.out.println("=======================");
+
+        // PostWriteReqDto 테스트 완료!!
+        // if (postWriteReqDto.getTitle() == null) {
+        // throw new NullPointerException("title이 없습니다.");
+        // }
+        // if (postWriteReqDto.getContent() == null) {
+        // throw new NullPointerException("content가 없습니다.");
+        // }
+        // if (postWriteReqDto.getCategoryId() == null) {
+        // throw new NullPointerException("categoryId가 없습니다.");
+        // }
+        return "1";
     }
 
     @GetMapping("/s/post/write-form")
