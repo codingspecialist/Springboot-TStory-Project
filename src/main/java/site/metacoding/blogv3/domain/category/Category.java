@@ -18,11 +18,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import site.metacoding.blogv3.domain.user.User;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
@@ -48,5 +48,14 @@ public class Category {
     private LocalDateTime createDate;
     @LastModifiedDate // update 할때만 동작
     private LocalDateTime updateDate;
+
+    @Builder
+    public Category(Integer id, String title, User user, LocalDateTime createDate, LocalDateTime updateDate) {
+        this.id = id;
+        this.title = title;
+        this.user = user;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 
 }
