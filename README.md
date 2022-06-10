@@ -1,5 +1,7 @@
 # 스프링부트 JPA 블로그 V3 - GREEN Computer
 
+### 시큐리티 테스트 참고
+- https://tecoble.techcourse.co.kr/post/2020-09-30-spring-security-test/
 
 ### 1. 의존성
 - devtools

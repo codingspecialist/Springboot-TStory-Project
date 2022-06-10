@@ -19,6 +19,9 @@ repositories {
 }
 
 dependencies {
+	// https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
 	runtimeOnly 'com.h2database:h2'
 	implementation 'org.jsoup:jsoup:1.14.3'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'

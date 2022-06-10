@@ -16,58 +16,56 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
-
 import site.metacoding.blogv3.web.dto.post.PostWriteReqDto;
 
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PostControllerTest {
 
-    private MockMvc mockMvc;
+        private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext context;
+        @Autowired
+        private WebApplicationContext context;
 
-    @BeforeEach
-    public void setup() {
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(context)
-                .apply(SecurityMockMvcConfigurers.springSecurity())
-                .build();
-    }
+        @BeforeEach
+        public void setup() {
+                mockMvc = MockMvcBuilders
+                                .webAppContextSetup(context)
+                                .apply(SecurityMockMvcConfigurers.springSecurity())
+                                .build();
+        }
 
-    // WithMockUser는 간단한 인증만 통과하고 싶을 때 사용!!
-    // 만약에 세션에 있는 값을 내부에서 사용해야 하면? -> 다른 것을 써야 함.
-    // @WithMockUser // username="username" password="password"
+        // WithMockUser는 간단한 인증만 통과하고 싶을 때 사용!!
+        // 만약에 세션에 있는 값을 내부에서 사용해야 하면? -> 다른 것을 써야 함.
+        // @WithMockUser // username="username" password="password"
 
-    @WithUserDetails("ssar")
-    @Test
-    public void write_테스트() throws Exception {
+        @WithUserDetails("ssar")
+        @Test
+        public void write_테스트() throws Exception {
 
-        // Authentication authentication =
-        // SecurityContextHolder.getContext().getAuthentication();
-        // LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+                // Authentication authentication =
+                // SecurityContextHolder.getContext().getAuthentication();
+                // LoginUser loginUser = (LoginUser) authentication.getPrincipal();
 
-        // given
-        PostWriteReqDto postWriteReqDto = PostWriteReqDto.builder()
-                .categoryId(1) // 이거 분명히 터짐
-                .title("스프링1강")
-                .content("재밌음")
-                .build();
+                // given
+                PostWriteReqDto postWriteReqDto = PostWriteReqDto.builder()
+                                .categoryId(1) // 이거 분명히 터짐
+                                .title("스프링1강")
+                                .content("재밌음")
+                                .build();
 
-        // when
-        ResultActions resultActions = mockMvc.perform(
-                post("/s/post")
-                        .param("title", postWriteReqDto.getTitle())
-                        .param("content", postWriteReqDto.getContent())
-                        .param("categoryId", postWriteReqDto.getCategoryId() + ""));
+                // when
+                ResultActions resultActions = mockMvc.perform(
+                                post("/s/post")
+                                                .param("title", postWriteReqDto.getTitle())
+                                                .param("content", postWriteReqDto.getContent())
+                                                .param("categoryId", postWriteReqDto.getCategoryId() + ""));
 
-        // then
+                // then
 
-        resultActions
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andDo(MockMvcResultHandlers.print());
-    }
+                resultActions
+                                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                                .andDo(MockMvcResultHandlers.print());
+        }
 
 }
