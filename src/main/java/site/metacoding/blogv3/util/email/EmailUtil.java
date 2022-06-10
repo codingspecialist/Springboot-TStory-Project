@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Component
 public class EmailUtil {
-
     private final JavaMailSender sender;
 
     public void sendEmail(String toAddress, String subject, String body) {
