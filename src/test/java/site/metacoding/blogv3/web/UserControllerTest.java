@@ -46,9 +46,6 @@ import site.metacoding.blogv3.util.email.EmailUtil;
 // @AutoConfigureMockMvc
 public class UserControllerTest {
 
-    @MockBean
-    private EmailUtil emailUtil;
-
     private MockMvc mockMvc;
 
     @Autowired
@@ -181,7 +178,6 @@ public class UserControllerTest {
 
         // Mock 객체가 아니라 실제 객체(EmailUtil)는 stub이 안된다
         // Mock를 할때 Mockito 환경이 아니라 Springboot Ioc에 Mock가 되어야 한다. @MockBean 사용!
-        doNothing().when(emailUtil).sendEmail("", "", "");
 
         // when
         ResultActions resultActions = mockMvc.perform(
