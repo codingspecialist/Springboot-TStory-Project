@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockMultipartFile;
@@ -34,6 +35,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.util.email.EmailUtil;
+import site.metacoding.blogv3.util.email.MockEmailUtil;
 
 // RestController 테스트는 통합테스트로 하면 편하다. TestRestTemplate 사용
 // Controller 테스트는 MockMvc가 필요함.(model 값 검증 같은 것을 할 수 있다.)
