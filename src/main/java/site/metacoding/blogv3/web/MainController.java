@@ -25,4 +25,5 @@ public class MainController {
         model.addAttribute("posts", postsEntity);
         return "main";
     }
+
 }
