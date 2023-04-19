@@ -2,12 +2,7 @@ package site.metacoding.blogv3.domain.user;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -20,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
+@Table(name = "user_tb")
 @Entity
 public class User {
 
@@ -46,8 +42,7 @@ public class User {
     private LocalDateTime updateDate;
 
     @Builder
-    public User(Integer id, String username, String password, String email, String profileImg, LocalDateTime createDate,
-            LocalDateTime updateDate) {
+    public User(Integer id, String username, String password, String email, String profileImg, LocalDateTime createDate, LocalDateTime updateDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -56,5 +51,4 @@ public class User {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
-
 }

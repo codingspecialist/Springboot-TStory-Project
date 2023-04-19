@@ -1,4 +1,4 @@
-package site.metacoding.blogv3.web.dto.category;
+package site.metacoding.blogv3.dto.category;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

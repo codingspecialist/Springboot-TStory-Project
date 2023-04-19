@@ -11,11 +11,10 @@ import site.metacoding.blogv3.domain.user.User;
 
 @Data
 @RequiredArgsConstructor
-public class LoginUser implements UserDetails {
+public class SessionUser implements UserDetails {
 
     private final User user;
 
-    // 궁금하면 졸업하고 취업전에 유튜브 시큐리티
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

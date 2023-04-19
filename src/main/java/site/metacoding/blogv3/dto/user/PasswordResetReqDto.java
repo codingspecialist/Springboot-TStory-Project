@@ -1,4 +1,4 @@
-package site.metacoding.blogv3.web.dto.user;
+package site.metacoding.blogv3.dto.user;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

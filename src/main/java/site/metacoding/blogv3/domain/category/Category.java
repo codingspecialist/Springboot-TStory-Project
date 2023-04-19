@@ -27,8 +27,8 @@ import site.metacoding.blogv3.domain.user.User;
 @Data
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "category_uk", columnNames = { "title", "userId" })
+@Table(name = "category_tb",uniqueConstraints = {
+        @UniqueConstraint(name = "category_uk", columnNames = { "title", "user_id" })
 })
 public class Category {
 
@@ -40,7 +40,6 @@ public class Category {
     @Column(length = 60, nullable = false)
     private String title;
 
-    @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 

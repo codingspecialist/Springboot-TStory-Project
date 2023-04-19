@@ -13,23 +13,19 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.domain.user.UserRepository;
-import site.metacoding.blogv3.domain.visit.Visit;
-import site.metacoding.blogv3.domain.visit.VisitRepository;
 import site.metacoding.blogv3.handler.ex.CustomApiException;
 import site.metacoding.blogv3.handler.ex.CustomException;
 import site.metacoding.blogv3.util.UtilFileUpload;
-import site.metacoding.blogv3.util.email.EmailUtil;
-import site.metacoding.blogv3.web.dto.user.PasswordResetReqDto;
+import site.metacoding.blogv3.util.UtilEmail;
+import site.metacoding.blogv3.dto.user.PasswordResetReqDto;
 
 @RequiredArgsConstructor
 @Service // IoC 등록
 public class UserService {
 
-    // DI
-    private final VisitRepository visitRepository;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final EmailUtil emailUtil;
+    private final UtilEmail emailUtil;
 
     @Value("${file.path}")
     private String uploadFolder;
@@ -80,12 +76,6 @@ public class UserService {
         user.setPassword(encPassword);
 
         User userEntity = userRepository.save(user);
-
-        // 2. save 두번
-        Visit visit = new Visit();
-        visit.setTotalCount(0L);
-        visit.setUser(userEntity); // 터트리고 테스트 해보기
-        visitRepository.save(visit);
 
         return userEntity;
     }

@@ -3,17 +3,9 @@ package site.metacoding.blogv3.domain.post;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -25,10 +17,10 @@ import site.metacoding.blogv3.domain.category.Category;
 import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.util.UtilPost;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
+@Table(name = "post_tb")
 @Entity
 public class Post {
 
@@ -44,13 +36,11 @@ public class Post {
     private String content;
 
     @Column(length = 200, nullable = true)
-    private String thumnail;
+    private String thumbnail;
 
-    @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
-    @JoinColumn(name = "categoryId")
     @ManyToOne
     private Category category;
 
@@ -59,13 +49,23 @@ public class Post {
     @LastModifiedDate // update 할때만 동작
     private LocalDateTime updateDate;
 
-    // yyyy-MM-dd HH:mm:ss
-    public String getFormatCreateDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return createDate.format(formatter);
+    public String getFormatCreateDate(){
+        return createDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     public String getFormatContent() {
         return UtilPost.getContentWithoutImg(content);
+    }
+
+    @Builder
+    public Post(Integer id, String title, String content, String thumbnail, User user, Category category, LocalDateTime createDate, LocalDateTime updateDate) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.thumbnail = thumbnail;
+        this.user = user;
+        this.category = category;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
     }
 }

@@ -20,7 +20,7 @@ public class UtilFileUpload {
             Path filePath = Paths.get(uploadFolder + uuidFilename);
             Files.write(filePath, file.getBytes());
         } catch (Exception e) {
-            throw new CustomException("파일 업로드 실패");
+            throw new CustomException("파일 업로드 실패 : "+e.getMessage());
         }
         return uuidFilename;
     }

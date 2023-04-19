@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,13 +23,13 @@ import lombok.NoArgsConstructor;
 import site.metacoding.blogv3.domain.post.Post;
 import site.metacoding.blogv3.domain.user.User;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class) // 이 부분 추가
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "love_uk", columnNames = { "postId", "userId" })
+@Table(name = "love_tb",
+        uniqueConstraints = {
+        @UniqueConstraint(name = "love_uk", columnNames = { "post_id", "user_id" })
 })
 public class Love {
 
@@ -36,11 +37,9 @@ public class Love {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "postId")
     @ManyToOne
     private Post post;
 
-    @JoinColumn(name = "userId")
     @ManyToOne
     private User user;
 
@@ -49,4 +48,12 @@ public class Love {
     @LastModifiedDate // update 할때만 동작
     private LocalDateTime updateDate;
 
+    @Builder
+    public Love(Integer id, Post post, User user, LocalDateTime createDate, LocalDateTime updateDate) {
+        this.id = id;
+        this.post = post;
+        this.user = user;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
 }

@@ -1,4 +1,4 @@
-package site.metacoding.blogv3.web.dto.post;
+package site.metacoding.blogv3.dto.post;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -24,24 +24,24 @@ public class PostWriteReqDto {
     @NotBlank
     private String title;
 
-    private MultipartFile thumnailFile;
+    private MultipartFile thumbnailFile;
     @NotNull
     private String content; // 컨텐트 공백만 허용
 
     @Builder
     public PostWriteReqDto(@NotBlank Integer categoryId, @Size(min = 1, max = 60) @NotBlank String title,
-            MultipartFile thumnailFile, @NotNull String content) {
+            MultipartFile thumbnailFile, @NotNull String content) {
         this.categoryId = categoryId;
         this.title = title;
-        this.thumnailFile = thumnailFile;
+        this.thumbnailFile = thumbnailFile;
         this.content = content;
     }
 
-    public Post toEntity(String thumnail, User principal, Category category) {
+    public Post toEntity(String thumbnail, User principal, Category category) {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
-        post.setThumnail(thumnail);
+        post.setThumbnail(thumbnail);
         post.setUser(principal);
         post.setCategory(category);
         return post;

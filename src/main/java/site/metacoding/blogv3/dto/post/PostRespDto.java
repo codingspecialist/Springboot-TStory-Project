@@ -1,4 +1,4 @@
-package site.metacoding.blogv3.web.dto.post;
+package site.metacoding.blogv3.dto.post;
 
 import java.util.List;
 
@@ -20,5 +20,4 @@ public class PostRespDto {
     private Integer prev;
     private Integer next;
     private List<Integer> pageNumbers;
-    private Long totalCount;
 }

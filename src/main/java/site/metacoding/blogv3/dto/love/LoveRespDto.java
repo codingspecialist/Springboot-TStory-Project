@@ -1,4 +1,4 @@
-package site.metacoding.blogv3.web.dto.love;
+package site.metacoding.blogv3.dto.love;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

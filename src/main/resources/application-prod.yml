@@ -1,18 +1,16 @@
 server:
-  port: 8080
+  port: 5000
   servlet:
     context-path: /
     encoding:
       charset: utf-8
-    session:
-      timeout: 30
 
 spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: 아이디
-    password: 비밀번호
+    username: ${email.username}
+    password: ${email.password}
     properties:
       mail:
         smtp:
@@ -23,22 +21,19 @@ spring:
   mustache:
     expose-session-attributes: true
   datasource:
-      url: jdbc:mariadb://아이피:3306/greendb 
-      driver-class-name: org.mariadb.jdbc.Driver
-      username: 유저명
-      password: 비밀번호
+    url: jdbc:mariadb://${rds.hostname}:${rds.port}/${rds.db.name}?allowPublicKeyRetrieval=true&useSSL=false
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ${rds.username}
+    password: ${rds.password}
 
   jpa:
     open-in-view: true
     hibernate:
       ddl-auto: none # 조심하자!! 젭알 ㅠ
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
 file:
   path: /home/ubuntu/upload/
 
 logging:
   level:
-    '[org.springframework.web]': INFO
-    '[org.hibernate]': INFO
+    '[site.metacoding.blogv3]': INFO

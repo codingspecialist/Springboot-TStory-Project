@@ -12,10 +12,9 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv3.domain.user.User;
 import site.metacoding.blogv3.domain.user.UserRepository;
 
-@Profile("dev")
 @RequiredArgsConstructor
 @Service // IoC 컨테이너 등록됨.
-public class LoginService implements UserDetailsService {
+public class SessionService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -23,7 +22,8 @@ public class LoginService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userOp = userRepository.findByUsername(username);
         if (userOp.isPresent()) {
-            return new LoginUser(userOp.get());
+            System.out.println("유저 찾음");
+            return new SessionUser(userOp.get());
         }
         return null;
     }

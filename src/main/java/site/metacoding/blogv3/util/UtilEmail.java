@@ -1,4 +1,4 @@
-package site.metacoding.blogv3.util.email;
+package site.metacoding.blogv3.util;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class EmailUtil {
+public class UtilEmail {
     private final JavaMailSender sender;
 
     public void sendEmail(String toAddress, String subject, String body) {

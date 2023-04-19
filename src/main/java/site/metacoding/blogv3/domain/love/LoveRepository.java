@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface LoveRepository extends JpaRepository<Love, Integer> {
 
-    @Query(value = "SELECT * FROM love WHERE userId = :userId AND postId = :postId", nativeQuery = true)
+    @Query("SELECT lo FROM Love lo WHERE lo.user.id = :userId AND lo.post.id = :postId")
     Optional<Love> mFindByUserIdAndPostId(@Param("userId") Integer userId, @Param("postId") Integer postId);
 }

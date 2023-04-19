@@ -18,7 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer { // web.xml 설정 파일
 
         registry
                 .addResourceHandler("/upload/**")
-                .addResourceLocations("file:///" + uploadFolder) // file 프로토콜은 :/// 사용
+                .addResourceLocations("file:" + uploadFolder) // 절대경로 file 프로토콜은 file:/ 사용
                 .setCachePeriod(60 * 60) // 초 단위 => 한시간
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());

@@ -3,11 +3,15 @@ package site.metacoding.blogv3.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import site.metacoding.blogv3.handler.LoginSuccessHandler;
+import site.metacoding.blogv3.config.auth.SessionUser;
+import site.metacoding.blogv3.domain.user.User;
+
+import javax.servlet.http.HttpSession;
 
 @EnableWebSecurity // 해당 파일로 시큐리티가 활성화
 @Configuration
@@ -19,21 +23,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/h2-console/**");
+    }
+
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable(); // 이거 안하면 postman 테스트 못함.
+        http.csrf().disable();
+
+        http.formLogin()
+                .loginPage("/login-form")
+                .loginProcessingUrl("/login")
+                .successHandler((request, response, authentication) -> {
+                    SessionUser loginUser = (SessionUser) authentication.getPrincipal();
+                    User principal = loginUser.getUser();
+                    HttpSession session = request.getSession();
+                    session.setAttribute("principal", principal);
+                    response.sendRedirect("/user/" + principal.getId() + "/post");
+                })
+                .failureHandler((request, response, exception) -> {
+                    System.out.println(exception.getMessage());
+                    response.sendRedirect("/login-form");
+                });
+
 
         http.authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll()  // 누구나 h2-console 접속 허용
                 .antMatchers("/s/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
-                // .usernameParameter("uname")
-                // .passwordParameter("pwd")
-                .loginPage("/login-form")
-                .loginProcessingUrl("/login")
-                // .failureHandler(null)
-                // .defaultSuccessUrl("/")
-                .successHandler(new LoginSuccessHandler());
-
+                .csrf()
+                .ignoringAntMatchers("/h2-console/**")
+                .disable();
     }
 }
